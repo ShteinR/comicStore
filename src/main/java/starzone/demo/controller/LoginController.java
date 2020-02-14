@@ -10,7 +10,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller
-public class HomeResource {
+public class LoginController {
     @Autowired
     UserRepository userRepository;
 
@@ -19,7 +19,7 @@ public class HomeResource {
         if (principal != null) {
             Optional<User> user = userRepository.findUserByUserName(principal.getName());
             if (user.get().getRoles().equals("ROLE_ADMIN")) {
-                return "redirect:/add";
+                return "redirect:/adminPage";
             }
             return "redirect:/product";
         } else {

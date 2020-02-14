@@ -1,4 +1,4 @@
-package starzone.demo.service;
+package starzone.demo.service.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

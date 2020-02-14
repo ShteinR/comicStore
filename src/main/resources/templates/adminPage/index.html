@@ -13,40 +13,37 @@
     <a th:href="${'/login'}">sign in</a>
 </td>
 <td>
-    <a th:href="${'/cart'}">cart</a>
+    <a th:href="${'/add'}">add</a>
 </td>
-
 <table border="2">
     <tr>
         <th>name</th>
         <th>photo</th>
         <th>price</th>
         <th>description</th>
-        <th>author</th>
-        <th>artist</th>
         <th>buy</th>
     </tr>
-    <tr th:each="product : ${products}">
+    <!--<tr th:each="product : ${products}">
         <td th:text="${product.getName()}"></td>
         <td>
             <img th:src="${'/images/'+product.getImage()}" width="120">
         </td>
         <td th:text="${product.getPrice()}"></td>
         <td th:text="${product.getDescription()}"></td>
-        <td th:text="${product.getAuthor().authorName}"></td>
-        <td th:text="${product.getArtist().getArtistName()}"></td>
 
         <td>
             <a th:href="${'/cart/buy/'+product.getId()}">Buy</a>
         </td>
-        <td>
-            <!--   <a th:href="${'/search/find/'+product.getAuthor().getId()}">get his comics</a>
-   -->
-        </td>
+
+    </tr>-->
+    <tr th:each="order:${orders}">
+
+        <td th:text="${order.getName()}"></td>
+        <td th:text="${order.isStatus()}"></td>
+        <td th:text="${order.getId()}"></td>
+
+
     </tr>
 </table>
-
-
-</form>
 </body>
 </html>

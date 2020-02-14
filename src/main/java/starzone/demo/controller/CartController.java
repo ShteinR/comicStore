@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import starzone.demo.dao.UserRepository;
 import starzone.demo.entity.*;
 import starzone.demo.service.*;
+import starzone.demo.service.implementations.MyUserDetailService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/cart")
@@ -63,27 +65,38 @@ public class CartController {
     private String checkout(HttpSession session, Principal principal) {
 
         if (principal != null) {
-            Optional<User> user = userRepository.findUserByUserName(principal.getName());
-            Order order = new Order();
-            order.setStatus(true);
-            order.setName("new Order");
-            int orderId = orderService.create(order).getId();
-            List<Item> cart = (List<Item>) session.getAttribute("cart");
-            for (Item item : cart) {
+            if (session.getAttribute("cart") != null) {
+                Optional<User> user = userRepository.findUserByUserName(principal.getName());
+                Order order = new Order();
+                order.setStatus(true);
+                order.setName("new Order");
+                List<Item> cart = (List<Item>) session.getAttribute("cart");
+                int id = orderService.create(order).getId();
+                int i = 1;
+                for (Item item : cart) {
+                    try {
+                        OrderDetail orderDetail = new OrderDetail();
+                        orderDetail.setId(UUID.randomUUID());
+                        orderDetail.setUser(user.get());
+                        orderDetail.setPrice((int) item.getProduct().get().getPrice());
+                        orderDetail.setQuantity(item.getQuantity());
+                        orderDetail.setOrder(order);
+                        orderDetail.setProduct(item.getProduct().get());
 
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.setId(orderId);
-                orderDetail.setUser(user.get());
-                orderDetail.setPrice((int) item.getProduct().get().getPrice());
-                orderDetail.setQuantity(item.getQuantity());
-                orderDetail.setOrder(order);
-                orderDetail.setProduct(item.getProduct().get());
-                orderDetailService.create(orderDetail);
+                        orderDetailService.create(orderDetail);
+
+                    } catch (Exception e) {
+                        return "redirect:/sorry";
+                    }
+
+                }
+                session.removeAttribute("cart");
+                return "redirect:../product";
+            } else {
+                return "redirect:../product";
             }
-            session.removeAttribute("cart");
-            return "redirect:../product";
         } else {
-            return "redirect:../login";
+            return "redirect:../registration";
         }
 
     }
@@ -121,12 +134,16 @@ public class CartController {
     }
 
     private double summary(HttpSession session) {
-        List<Item> cart = (List<Item>) session.getAttribute("cart");
-        double sum = 0;
-        for (Item item : cart) {
-            sum += item.getQuantity() * item.getProduct().get().getPrice();
+        if (session.getAttribute("cart") != null) {
+            List<Item> cart = (List<Item>) session.getAttribute("cart");
+            double sum = 0;
+            for (Item item : cart) {
+                sum += item.getQuantity() * item.getProduct().get().getPrice();
+            }
+            return sum;
+        } else {
+            return 0;
         }
-        return sum;
 
     }
 }

@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import starzone.demo.entity.Product;
-import starzone.demo.service.ProductServiceImpl;
+import starzone.demo.service.implementations.ProductServiceImpl;
 @Controller
 @RequestMapping("/add")
-public class Add {
+public class AddController {
     @Autowired
     ProductServiceImpl productService;
 

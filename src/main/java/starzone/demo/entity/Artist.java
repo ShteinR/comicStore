@@ -1,23 +1,21 @@
 package starzone.demo.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "authors")
-public class Author implements Serializable {
+@Table(name = "artists")
+public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "author_name")
-    private String authorName;
-    @Column(name = "author_age")
-    private int age;
-    @OneToMany(mappedBy = "author")
+    @Column(name = "artist_name")
+    private String artistName;
+    @Column(name = "artist_age")
+    private int artistAge;
+    @OneToMany(mappedBy = "artist")
     private List<Product> comics = new ArrayList<>();
-
 
     public List<Product> getComics() {
         return comics;
@@ -27,12 +25,12 @@ public class Author implements Serializable {
         this.comics = comics;
     }
 
-    public int getAge() {
-        return age;
+    public int getAuthorAge() {
+        return artistAge;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAuthorAge(int authorAge) {
+        this.artistAge = authorAge;
     }
 
     public int getId() {
@@ -43,12 +41,12 @@ public class Author implements Serializable {
         this.id = id;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getArtistName() {
+        return artistName;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
 

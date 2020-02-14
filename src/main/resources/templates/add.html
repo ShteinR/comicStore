@@ -26,7 +26,7 @@
                                                                                   th:field="*{description}"/>
     </div>
     <div class="form-group">
-        <label for="imageUrl" class="control-label">description</label> <input id="imageUrl"
+        <label for="imageUrl" class="control-label">image name</label> <input id="imageUrl"
                                                                                class="form-control"
                                                                                type="text"
                                                                                th:field="*{image}"/>
@@ -36,6 +36,30 @@
                                                                       class="form-control"
                                                                       type="text"
                                                                       th:field="*{price}"/>
+    </div>
+    <div class="form-group">
+        <label for="artist" class="control-label">artist</label> <input id="artist"
+                                                                        class="form-control"
+                                                                        type="text"
+                                                                        th:field="*{artist.artistName}"/>
+    </div>
+    <div class="form-group">
+        <label for="artist age" class="control-label">artist age</label> <input id="artist age"
+                                                                                class="form-control"
+                                                                                type="text"
+                                                                                th:field="*{artist.authorAge}"/>
+    </div>
+    <div class="form-group">
+        <label for="author" class="control-label">author</label> <input id="author"
+                                                                        class="form-control"
+                                                                        type="text"
+                                                                        th:field="*{author.authorName}"/>
+    </div>
+    <div class="form-group">
+        <label for="author age" class="control-label">author age</label> <input id="author age"
+                                                                                class="form-control"
+                                                                                type="text"
+                                                                                th:field="*{author.age}"/>
     </div>
 
     <div class="form-group">

@@ -1,9 +1,10 @@
-package starzone.demo.service;
+package starzone.demo.service.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import starzone.demo.dao.ProductDao;
 import starzone.demo.entity.Product;
+import starzone.demo.service.ProductService;
 
 import javax.transaction.Transactional;
 import java.util.List;
