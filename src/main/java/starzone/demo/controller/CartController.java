@@ -78,7 +78,7 @@ public class CartController {
                         OrderDetail orderDetail = new OrderDetail();
                         orderDetail.setId(UUID.randomUUID());
                         orderDetail.setUser(user.get());
-                        orderDetail.setPrice((int) item.getProduct().get().getPrice());
+                        orderDetail.setPrice((int) ( item.getProduct().get().getPrice()*item.getQuantity()));
                         orderDetail.setQuantity(item.getQuantity());
                         orderDetail.setOrder(order);
                         orderDetail.setProduct(item.getProduct().get());
