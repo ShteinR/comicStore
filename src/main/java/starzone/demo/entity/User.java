@@ -17,6 +17,7 @@ public class User {
     private String userName;
     @Column(name = "user_password")
     private String userPassword;
+    @Column(name = "active")
     private boolean active;
     private String roles;
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-11"/>
+    <title>Title</title>
+</head>
+<body>
+<h2>Comics</h2>
+<td>
+    <a th:href="${'/registration'}">sign up</a>
+</td>
+<td>
+    <a th:href="${'/login'}">sign in</a>
+</td>
+<td>
+    <a th:href="${'/adminPage/usersControl'}">users control</a>
+</td>
+<td>
+    <a th:href="${'/add'}">add</a>
+</td>
+<table border="2">
+    <tr>
+        <th>product name</th>
+        <th>price</th>
+        <th>user name</th>
+    </tr>
+
+    <tr th:each="orderDetail:${orderDetails}">
+
+        <td th:text="${orderDetail.getProduct().getName()}"></td>
+        <td th:text="${orderDetail.getPrice()}"></td>
+        <td th:text="${orderDetail.getUser().getUserName()}"></td>
+
+
+    </tr>
+</table>
+</body>
+</html>

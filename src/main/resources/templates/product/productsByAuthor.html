@@ -6,15 +6,6 @@
 </head>
 <body>
 <h2>Comics</h2>
-<td>
-    <a th:href="${'/registration'}">sign up</a>
-</td>
-<td>
-    <a th:href="${'/login'}">sign in</a>
-</td>
-<td>
-    <a th:href="${'/cart'}">cart</a>
-</td>
 
 <table border="2">
     <tr>
@@ -23,10 +14,10 @@
         <th>price</th>
         <th>description</th>
         <th>author</th>
-        <th>artist</th>
         <th>buy</th>
     </tr>
-    <tr th:each="product : ${products}">
+
+    <tr th:each="product : ${comics}">
         <td th:text="${product.getName()}"></td>
         <td>
             <img th:src="${'/images/'+product.getImage()}" width="120">
@@ -34,19 +25,10 @@
         <td th:text="${product.getPrice()}"></td>
         <td th:text="${product.getDescription()}"></td>
         <td th:text="${product.getAuthor().authorName}"></td>
-        <td th:text="${product.getArtist().getArtistName()}"></td>
-
         <td>
             <a th:href="${'/cart/buy/'+product.getId()}">Buy</a>
         </td>
-        <td>
-           <a th:href="${'/product/findByArtist/'+product.getArtist().getId()}">comics by this artist</a>
 
-        </td>
-        <td>
-           <a th:href="${'/product/find/'+product.getAuthor().getId()}">comics by this author</a>
-
-        </td>
     </tr>
 </table>
 

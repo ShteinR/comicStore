@@ -1,5 +1,9 @@
 package starzone.demo.entity;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
@@ -9,7 +13,7 @@ import java.util.UUID;
 public class OrderDetail implements Serializable {
     @Id
     private UUID id;
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL,optional = false,targetEntity = Order.class)
     @JoinColumn(name = "order_id")
     private Order order;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Product.class)

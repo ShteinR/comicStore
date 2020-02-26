@@ -68,7 +68,7 @@ public class CartController {
             if (session.getAttribute("cart") != null) {
                 Optional<User> user = userRepository.findUserByUserName(principal.getName());
                 Order order = new Order();
-                order.setStatus(true);
+                order.setStatus(false);
                 order.setName("new Order");
                 List<Item> cart = (List<Item>) session.getAttribute("cart");
                 int id = orderService.create(order).getId();
@@ -78,7 +78,7 @@ public class CartController {
                         OrderDetail orderDetail = new OrderDetail();
                         orderDetail.setId(UUID.randomUUID());
                         orderDetail.setUser(user.get());
-                        orderDetail.setPrice((int) ( item.getProduct().get().getPrice()*item.getQuantity()));
+                        orderDetail.setPrice((int) (item.getProduct().get().getPrice() * item.getQuantity()));
                         orderDetail.setQuantity(item.getQuantity());
                         orderDetail.setOrder(order);
                         orderDetail.setProduct(item.getProduct().get());
@@ -96,6 +96,7 @@ public class CartController {
                 return "redirect:../product";
             }
         } else {
+
             return "redirect:../registration";
         }
 
@@ -115,12 +116,14 @@ public class CartController {
 
     @PostMapping("/update")
     public String update(HttpSession session, HttpServletRequest request) {
-        String[] quantities = request.getParameterValues("quantity");
-        List<Item> cart = (List<Item>) session.getAttribute("cart");
-        for (int i = 0; i < cart.size(); i++) {
-            cart.get(i).setQuantity(Integer.parseInt(quantities[i]));
+        if (session.getAttribute("cart") != null) {
+            String[] quantities = request.getParameterValues("quantity");
+            List<Item> cart = (List<Item>) session.getAttribute("cart");
+            for (int i = 0; i < cart.size(); i++) {
+                cart.get(i).setQuantity(Integer.parseInt(quantities[i]));
+            }
+            session.setAttribute("cart", cart);
         }
-        session.setAttribute("cart", cart);
         return "redirect:../cart";
     }
 

@@ -7,6 +7,7 @@ import starzone.demo.entity.OrderDetail;
 import starzone.demo.service.OrderDetailService;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 
 @Service("orderDetailService")
 @Transactional
@@ -20,7 +21,17 @@ public class OrderDeatailServiceImpl implements OrderDetailService {
     }
 
     @Override
+    public void deleteAll(Collection<OrderDetail> orderDetails) {
+        orderDetailDAO.deleteAll(orderDetails);
+    }
+
+    @Override
     public Iterable<OrderDetail> findAll() {
         return orderDetailDAO.findAll();
+    }
+
+    @Override
+    public void delete(OrderDetail orderDetail) {
+        orderDetailDAO.delete(orderDetail);
     }
 }

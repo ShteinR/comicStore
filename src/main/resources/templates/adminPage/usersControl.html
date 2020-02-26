@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-11"/>
+    <title>Title</title>
+</head>
+<body>
+<h2>Comics</h2>
+<td>
+    <a th:href="${'/registration'}">sign up</a>
+</td>
+<td>
+    <a th:href="${'/login'}">sign in</a>
+</td>
+<td>
+    <a th:href="${'/add'}">add</a>
+</td>
+<td>
+    <a th:href="${'/adminPage'}">admin page</a>
+</td>
+<table border="2">
+    <tr>
+        <th>name</th>
+        <th>role</th>
+        <th>is active</th>
+    </tr>
+
+    <tr th:each="user:${users}">
+
+        <td th:text="${user.getUserName()}"></td>
+        <td th:text="${user.getRoles()}"></td>
+        <td th:text="${user.isActive()}"></td>
+        <td>
+            <a th:href="${'../adminPage/block/'+user.getId()}">block</a>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>

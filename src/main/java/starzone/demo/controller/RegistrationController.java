@@ -26,13 +26,11 @@ public class RegistrationController {
     @PostMapping(name = "/registration")
     public String addUser(@ModelAttribute("userForm") User user, Model model) {
         try {
-            if (!userDetailService.saveUser(user)) {
-                model.addAttribute("userForm", "user already exist");
-                return "redirect:/login";
-            }
-            return "redirect:/product";
+            userDetailService.saveUser(user);
+
+            return "redirect:/login";
         } catch (Exception e) {
-            return "redirect:/";
+            return "/registration";
         }
     }
 

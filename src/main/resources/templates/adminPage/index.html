@@ -15,6 +15,9 @@
 <td>
     <a th:href="${'/add'}">add</a>
 </td>
+<td>
+    <a th:href="${'adminPage/usersControl'}">users</a>
+</td>
 <table border="2">
     <tr>
         <th>name</th>
@@ -41,7 +44,12 @@
         <td th:text="${order.getName()}"></td>
         <td th:text="${order.isStatus()}"></td>
         <td th:text="${order.getId()}"></td>
-
+        <td>
+            <a th:href="${'/adminPage/remove/'+order.getId()}">done</a>
+        </td>
+        <td>
+            <a th:href="${'/adminPage/details/'+order.getId()}">get info</a>
+        </td>
 
     </tr>
 </table>

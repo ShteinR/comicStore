@@ -9,6 +9,7 @@ import starzone.demo.dao.UserRepository;
 import starzone.demo.entity.MyUserDetails;
 import starzone.demo.entity.User;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,7 +17,22 @@ public class MyUserDetailService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
+    public void changeAccessModifier(int id) {
+        if(userRepository.findById(id).isPresent()){
+            User user = userRepository.findById(id).get();
+            userRepository.findById(id).get().setActive(!user.isActive());
+            userRepository.save(user);
 
+        }
+    }
+
+    public Iterable<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> findById(int id) {
+        return userRepository.findById(id);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
